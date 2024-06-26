@@ -1,0 +1,2 @@
+OhMyRunPod
+OhMyRunPod --setup-ssh
