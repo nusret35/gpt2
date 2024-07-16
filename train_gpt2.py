@@ -314,7 +314,7 @@ torch.set_float32_matmul_precision('high')
 # create model
 model = GPT(GPTConfig(vocab_size=50304))
 model.to(device)
-model = torch.compile(model)
+# model = torch.compile(model)
 if ddp:
     model = DDP(model, device_ids=[ddp_local_rank])
 raw_model = model.module if ddp else model
@@ -343,6 +343,7 @@ optimizer = raw_model.configure_optimizers(weight_decay=0.1, learning_rate=6e-4,
 for step in range(max_steps):
     t0 = time.time()
 
+    # once in a while evaluate our validation loss
     if step % 100 == 0:
         model.eval()
         val_loader.reset()
