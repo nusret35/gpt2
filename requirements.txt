@@ -1,3 +1,6 @@
 OhMyRunPod
 transformers
 tiktoken
+tqdm
+datasets
+numpy
