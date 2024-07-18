@@ -8,11 +8,12 @@ if __name__ == "__main__":
     device_type = "cpu"
     enc = tiktoken.get_encoding("gpt2")
     model = GPT(GPTConfig(vocab_size=50304))
-    checkpoint = torch.load('log/model_19072.pt')
+    #checkpoint = torch.load('log/model_19072.pt')
+    checkpoint = torch.load('log/model_19072.pt', map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint['model'])
     model.eval()
-    max_length = 32
-    tokens = enc.encode("Let's code some Python!")
+    max_length = 64
+    tokens = enc.encode("Real Madrid is the ")
     tokens = torch.tensor(tokens, dtype=torch.long)
     tokens = tokens.unsqueeze(0).repeat(1, 1)
     xgen = tokens.to(device)
